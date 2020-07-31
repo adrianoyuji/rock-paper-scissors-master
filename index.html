@@ -1,37 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Rock, Paper, Scissors</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
 
-  Score
-  Rules
+    <title>Frontend Mentor | Rock, Paper, Scissors</title>
 
-  You Picked
-  The House Picked
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      @font-face {
+        font-family: Barlow Semi Condensed;
+        src: url("./font/BarlowSemiCondensed-Bold.ttf");
+      }
+      html {
+        font-family: Barlow Semi Condensed;
+        height: 100%;
+        width: 100%;
+        padding: unset;
+        margin: unset;
+      }
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+      body {
+        padding: unset;
+        margin: unset;
+        background-image: radial-gradient(
+          at top,
+          hsl(214, 47%, 23%),
+          hsl(237, 49%, 15%)
+        );
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: auto;
+      }
+      .scoreboard-header {
+        flex: 3;
+        justify-content: center;
+        align-items: center;
+      }
+      .scoreboard {
+        display: flex;
+        border: solid;
+        border-width: 3px;
+        border-radius: 16px;
+        border-color: hsl(217, 16%, 45%);
+        padding: 24px;
+        margin: 5vh 20vw 5vh 20vw;
+        flex-direction: row;
+      }
+      .header-logo {
+        display: flex;
+        flex-direction: column;
+        height: 12vh;
+        flex: 8;
+      }
+      .score-container {
+        background-color: #e8e8e8;
+        border-radius: 8px;
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .score-header {
+        color: hsl(229, 64%, 46%);
+        letter-spacing: 3px;
+      }
+      .score-value {
+        color: hsl(229, 25%, 31%);
+        font-size: 3.5rem;
+      }
+      .buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 7;
+      }
+      .steps {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 7;
+      }
+      .step-one {
+        height: 100%;
+        width: 100%;
+        background-image: url(./images/bg-triangle.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .step-one-rows {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        bottom: 50px;
+      }
 
-  You Win
-  You Lose
+      .paper-button {
+        height: 128px;
+        width: 128px;
+        background-color: #e8e8e8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        border: solid;
+        border-width: 24px;
+        border-color: hsl(230, 89%, 65%);
+        margin-right: 64px;
+        transition: all 0.1s ease-in-out;
+        cursor: pointer;
+      }
+      .rock-button {
+        height: 128px;
+        width: 128px;
+        background-color: #e8e8e8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        border: solid;
+        border-width: 24px;
+        border-color: hsl(349, 70%, 56%);
+        transition: all 0.1s ease-in-out;
+        cursor: pointer;
+      }
+      .scissors-button {
+        height: 128px;
+        width: 128px;
+        background-color: #e8e8e8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        border: solid;
+        border-width: 24px;
+        border-color: hsl(40, 84%, 53%);
+        transition: all 0.1s ease-in-out;
+        cursor: pointer;
+      }
+      .paper-button:hover {
+        height: 132px;
+        width: 132px;
+      }
+      .rock-button:hover {
+        height: 132px;
+        width: 132px;
+      }
+      .scissors-button:hover {
+        height: 132px;
+        width: 132px;
+      }
 
-  Play Again
+      .rules-footer {
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scoreboard-header">
+      <div class="scoreboard">
+        <div class="header-logo">
+          <img src="images/logo.svg" height="100%" width="162px" />
+        </div>
+        <div class="score-container">
+          <span class="score-header">SCORE</span>
+          <span class="score-value">12</span>
+        </div>
+      </div>
+    </div>
+    <div class="teste"></div>
+    <div class="steps">
+      <div class="step-one">
+        <div class="step-one-rows">
+          <div class="paper-button">
+            <img src="images/icon-paper.svg" height="72px" width="64px" />
+          </div>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+          <div class="scissors-button">
+            <img src="images/icon-scissors.svg" height="72px" width="64px" />
+          </div>
+        </div>
 
+        <div class="rock-button">
+          <img src="images/icon-rock.svg" height="72px" width="64px" />
+        </div>
+      </div>
+    </div>
 
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+    <div class="rules-footer">
+      aaa
+      <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by
+        <a
+          href="https://www.linkedin.com/in/adriano-yuji-sato-de-vasconcelos-034b09191/"
+          target="_blank"
+          >Adriano Yuji Sato de Vasconcelos</a
+        >.
+      </div>
+    </div>
+  </body>
 </html>
