@@ -237,7 +237,7 @@
         </div>
         <div class="score-container">
           <span class="score-header">SCORE</span>
-          <span class="score-value" id="score-value">0</span>
+          <span class="score-value" id="score-value"></span>
         </div>
       </div>
     </div>
@@ -281,6 +281,17 @@
     </div>
 
     <script>
+      window.onload = function () {
+        var scoreValue;
+        if (localStorage.getItem("scoreValue")) {
+          scoreValue = localStorage.getItem("scoreValue");
+        } else {
+          scoreValue = 0;
+        }
+        let score = document.getElementById("score-value");
+        score.innerHTML = scoreValue.toString();
+      };
+
       function playerChoice(playerWeapon) {
         let stepsDiv = document.getElementById("steps");
         stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen' ><h2>YOU PICKED</h2><div class='${playerWeapon}-button' style='height:15rem; width:15rem;border-width:36px'><img src='images/icon-${playerWeapon}.svg' height='144px' width='128px' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div class='empty-button'></div></div></div>`;
@@ -295,11 +306,19 @@
             switch (winner) {
               case "player":
                 score.innerHTML = parseFloat(score.innerHTML) + 1;
+                localStorage.setItem(
+                  "scoreValue",
+                  (parseFloat(score.innerHTML) + 1).toString()
+                );
                 results.innerHTML =
                   "<span class='battle-results-message'>YOU WIN</span> <div class='battle-results-button' onClick='restartGame()'>PLAY AGAIN</div>";
                 break;
               case "ai":
                 score.innerHTML = parseFloat(score.innerHTML) - 1;
+                localStorage.setItem(
+                  "scoreValue",
+                  (parseFloat(score.innerHTML) - 1).toString()
+                );
                 results.innerHTML =
                   "<span class='battle-results-message'>YOU LOSE</span> <div class='battle-results-button' onClick='restartGame()'>PLAY AGAIN</div>";
                 break;
