@@ -69,13 +69,17 @@
         flex: 8;
       }
       .score-container {
-        background-color: #e8e8e8;
+        background-color: #fff;
         border-radius: 8px;
         flex: 2;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+      }
+      h2 {
+        color: #e8e8e8;
+        letter-spacing: 0.25rem;
       }
       .score-header {
         color: hsl(229, 64%, 46%);
@@ -108,6 +112,14 @@
         justify-content: center;
         align-items: center;
       }
+      .step-two {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
       .step-one-rows {
         display: flex;
         flex-direction: row;
@@ -118,61 +130,100 @@
       }
 
       .paper-button {
-        height: 128px;
-        width: 128px;
+        height: 10rem;
+        width: 10rem;
         background-color: #e8e8e8;
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 50%;
         border: solid;
-        border-width: 24px;
+        border-width: 1.5rem;
         border-color: hsl(230, 89%, 65%);
-        margin-right: 64px;
         transition: all 0.1s ease-in-out;
         cursor: pointer;
       }
       .rock-button {
-        height: 128px;
-        width: 128px;
+        height: 10rem;
+        width: 10rem;
         background-color: #e8e8e8;
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 50%;
         border: solid;
-        border-width: 24px;
+        border-width: 1.5rem;
         border-color: hsl(349, 70%, 56%);
         transition: all 0.1s ease-in-out;
         cursor: pointer;
       }
       .scissors-button {
-        height: 128px;
-        width: 128px;
+        height: 10rem;
+        width: 10rem;
         background-color: #e8e8e8;
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 50%;
         border: solid;
-        border-width: 24px;
+        border-width: 1.5rem;
         border-color: hsl(40, 84%, 53%);
         transition: all 0.1s ease-in-out;
         cursor: pointer;
       }
+      .empty-button {
+        height: 20rem;
+        width: 20rem;
+        background-color: rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+      }
       .paper-button:hover {
-        height: 132px;
-        width: 132px;
+        transform: scale(0.9);
       }
       .rock-button:hover {
-        height: 132px;
-        width: 132px;
+        transform: scale(0.9);
       }
       .scissors-button:hover {
-        height: 132px;
-        width: 132px;
+        transform: scale(0.9);
       }
-
+      .picked-screen {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .battle-results {
+        padding: 10vw;
+        width: 10vw;
+        color: #e8e8e8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .battle-results-message {
+        font-size: 3rem;
+        position: relative;
+        white-space: nowrap;
+      }
+      .battle-results-button {
+        width: 15vw;
+        height: 5vh;
+        background-color: #fff;
+        color: hsl(229, 25%, 31%);
+        letter-spacing: 0.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .battle-results-button:hover {
+        background-color: #e8e8e8;
+      }
       .rules-footer {
         flex: 1;
       }
@@ -186,24 +237,29 @@
         </div>
         <div class="score-container">
           <span class="score-header">SCORE</span>
-          <span class="score-value">12</span>
+          <span class="score-value" id="score-value">0</span>
         </div>
       </div>
     </div>
     <div class="teste"></div>
-    <div class="steps">
+    <div class="steps" id="steps">
       <div class="step-one">
         <div class="step-one-rows">
-          <div class="paper-button">
+          <div class="paper-button" id="paper" onClick="playerChoice('paper')">
             <img src="images/icon-paper.svg" height="72px" width="64px" />
           </div>
 
-          <div class="scissors-button">
+          <div
+            class="scissors-button"
+            id="scissors"
+            onClick="playerChoice('scissors')"
+            style="margin-left: 64px;"
+          >
             <img src="images/icon-scissors.svg" height="72px" width="64px" />
           </div>
         </div>
 
-        <div class="rock-button">
+        <div class="rock-button" id="rock" onClick="playerChoice('rock')">
           <img src="images/icon-rock.svg" height="72px" width="64px" />
         </div>
       </div>
@@ -223,5 +279,69 @@
         >.
       </div>
     </div>
+
+    <script>
+      function playerChoice(playerWeapon) {
+        let stepsDiv = document.getElementById("steps");
+        stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen' ><h2>YOU PICKED</h2><div class='${playerWeapon}-button' style='height:15rem; width:15rem;border-width:36px'><img src='images/icon-${playerWeapon}.svg' height='144px' width='128px' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div class='empty-button'></div></div></div>`;
+
+        setTimeout(function () {
+          let AiWeapon = aiChoice();
+          stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen' ><h2>YOU PICKED</h2><div class='${playerWeapon}-button' style='height:15rem; width:15rem;border-width:36px'><img src='images/icon-${playerWeapon}.svg' height='144px' width='128px' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div class='${AiWeapon}-button' style='height:15rem; width:15rem;border-width:36px'><img src='images/icon-${AiWeapon}.svg' height='144px' width='128px' /></div></div></div>`;
+          setTimeout(function () {
+            let winner = decideWinner(playerWeapon, AiWeapon);
+            let score = document.getElementById("score-value");
+            let results = document.getElementById("battle-results");
+            switch (winner) {
+              case "player":
+                score.innerHTML = parseFloat(score.innerHTML) + 1;
+                results.innerHTML =
+                  "<span class='battle-results-message'>YOU WIN</span> <div class='battle-results-button' onClick='restartGame()'>PLAY AGAIN</div>";
+                break;
+              case "ai":
+                score.innerHTML = parseFloat(score.innerHTML) - 1;
+                results.innerHTML =
+                  "<span class='battle-results-message'>YOU LOSE</span> <div class='battle-results-button' onClick='restartGame()'>PLAY AGAIN</div>";
+                break;
+              case "tie":
+                results.innerHTML =
+                  "<span class='battle-results-message'>DRAW GAME</span> <div class='battle-results-button' onClick='restartGame()'>PLAY AGAIN</div>";
+                break;
+            }
+          }, 1000);
+        }, 1500);
+      }
+      function aiChoice() {
+        let value = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
+        if (value >= 1 && value <= 32) return "paper";
+        if (value >= 33 && value <= 65) return "rock";
+        if (value >= 66 && value <= 99) return "scissors";
+      }
+      function decideWinner(playerWeapon, AiWeapon) {
+        switch (playerWeapon) {
+          case "rock":
+            if (playerWeapon === AiWeapon) return "tie";
+            if (AiWeapon === "paper") return "ai";
+            if (AiWeapon === "scissors") return "player";
+            else return null;
+          case "scissors":
+            if (playerWeapon === AiWeapon) return "tie";
+            if (AiWeapon === "rock") return "ai";
+            if (AiWeapon === "paper") return "player";
+            else return null;
+          case "paper":
+            if (playerWeapon === AiWeapon) return "tie";
+            if (AiWeapon === "scissors") return "ai";
+            if (AiWeapon === "rock") return "player";
+            else return null;
+          default:
+            alert("error");
+        }
+      }
+      function restartGame() {
+        let stepsDiv = document.getElementById("steps");
+        stepsDiv.innerHTML = `<div class="steps" id="steps"><div class="step-one"><div class="step-one-rows"><div class="paper-button" id="paper" onClick="playerChoice('paper')"><img src="images/icon-paper.svg" height="72px" width="64px" /></div><div class="scissors-button" id="scissors" onClick="playerChoice('scissors')" style="margin-left: 64px;"><img src="images/icon-scissors.svg" height="72px" width="64px" />   </div> </div> <div class="rock-button" id="rock" onClick="playerChoice('rock')"><img src="images/icon-rock.svg" height="72px" width="64px" /></div></div>`;
+      }
+    </script>
   </body>
 </html>
