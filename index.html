@@ -227,6 +227,9 @@
       .rules-footer {
         flex: 1;
       }
+      h2 {
+        z-index: 2;
+      }
     </style>
   </head>
   <body>
@@ -282,43 +285,43 @@
 
     <script>
       window.onload = function () {
-        var scoreValue;
-        if (localStorage.getItem("scoreValue")) {
-          scoreValue = localStorage.getItem("scoreValue");
-        } else {
+        var scoreValue = localStorage.getItem("scoreValue");
+
+        if (!scoreValue) {
           scoreValue = 0;
         }
+
         let score = document.getElementById("score-value");
-        score.innerHTML = scoreValue.toString();
+        score.innerHTML = scoreValue;
       };
 
       function playerChoice(playerWeapon) {
         let stepsDiv = document.getElementById("steps");
-        stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen' ><h2>YOU PICKED</h2><div class='${playerWeapon}-button' style='height:15rem; width:15rem;border-width:36px'><img src='images/icon-${playerWeapon}.svg' height='144px' width='128px' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div class='empty-button'></div></div></div>`;
+        stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen' ><h2>YOU PICKED</h2><div id='player' class='${playerWeapon}-button' style='height:15rem; width:15rem;border-width:36px'><img src='images/icon-${playerWeapon}.svg' height='144px' width='128px' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div id='ai' class='empty-button'></div></div></div>`;
 
         setTimeout(function () {
           let AiWeapon = aiChoice();
-          stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen' ><h2>YOU PICKED</h2><div class='${playerWeapon}-button' style='height:15rem; width:15rem;border-width:36px'><img src='images/icon-${playerWeapon}.svg' height='144px' width='128px' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div class='${AiWeapon}-button' style='height:15rem; width:15rem;border-width:36px'><img src='images/icon-${AiWeapon}.svg' height='144px' width='128px' /></div></div></div>`;
+          stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen' ><h2>YOU PICKED</h2><div id='player' class='${playerWeapon}-button' style='height:15rem; width:15rem;border-width:36px'><img src='images/icon-${playerWeapon}.svg' height='144px' width='128px' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div id='ai' class='${AiWeapon}-button' style='height:15rem; width:15rem;border-width:36px'><img src='images/icon-${AiWeapon}.svg' height='144px' width='128px' /></div></div></div>`;
           setTimeout(function () {
             let winner = decideWinner(playerWeapon, AiWeapon);
             let score = document.getElementById("score-value");
             let results = document.getElementById("battle-results");
+            let ai = document.getElementById("ai");
+            let player = document.getElementById("player");
             switch (winner) {
               case "player":
                 score.innerHTML = parseFloat(score.innerHTML) + 1;
-                localStorage.setItem(
-                  "scoreValue",
-                  (parseFloat(score.innerHTML) + 1).toString()
-                );
+                localStorage.setItem("scoreValue", score.innerHTML);
+                player.style.boxShadow =
+                  "0px 0px 30px 120px hsl(214, 47%, 30%)";
                 results.innerHTML =
                   "<span class='battle-results-message'>YOU WIN</span> <div class='battle-results-button' onClick='restartGame()'>PLAY AGAIN</div>";
+
                 break;
               case "ai":
                 score.innerHTML = parseFloat(score.innerHTML) - 1;
-                localStorage.setItem(
-                  "scoreValue",
-                  (parseFloat(score.innerHTML) - 1).toString()
-                );
+                localStorage.setItem("scoreValue", score.innerHTML);
+                ai.style.boxShadow = "0px 0px 30px 120px hsl(214, 47%, 30%)";
                 results.innerHTML =
                   "<span class='battle-results-message'>YOU LOSE</span> <div class='battle-results-button' onClick='restartGame()'>PLAY AGAIN</div>";
                 break;
@@ -327,7 +330,7 @@
                   "<span class='battle-results-message'>DRAW GAME</span> <div class='battle-results-button' onClick='restartGame()'>PLAY AGAIN</div>";
                 break;
             }
-          }, 1000);
+          }, 500);
         }, 1500);
       }
       function aiChoice() {
