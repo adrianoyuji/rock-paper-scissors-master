@@ -44,8 +44,8 @@
         );
         display: flex;
         flex-direction: column;
-        height: 100%;
-        width: auto;
+        height: 100vh;
+        width: 100vw;
       }
       .scoreboard-header {
         flex: 3;
@@ -66,12 +66,16 @@
         display: flex;
         flex-direction: column;
         height: 12vh;
-        flex: 8;
+        flex-grow: 1;
+      }
+      .img-logo {
+        height: 100%;
+        width: 162px;
       }
       .score-container {
         background-color: #fff;
         border-radius: 8px;
-        flex: 2;
+        width: 20%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -80,6 +84,7 @@
       h2 {
         color: #e8e8e8;
         letter-spacing: 0.25rem;
+        z-index: 2;
       }
       .score-header {
         color: hsl(229, 64%, 46%);
@@ -129,9 +134,9 @@
         bottom: 50px;
       }
 
-      .paper-button {
-        height: 10rem;
-        width: 10rem;
+      .game-button {
+        height: 7rem;
+        width: 7rem;
         background-color: #e8e8e8;
         display: flex;
         justify-content: center;
@@ -139,56 +144,38 @@
         border-radius: 50%;
         border: solid;
         border-width: 1.5rem;
+        transition: all 0.1s ease-in-out;
+        cursor: pointer;
+      }
+
+      .paper {
         border-color: hsl(230, 89%, 65%);
-        transition: all 0.1s ease-in-out;
-        cursor: pointer;
       }
-      .rock-button {
-        height: 10rem;
-        width: 10rem;
-        background-color: #e8e8e8;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        border: solid;
-        border-width: 1.5rem;
+      .rock {
         border-color: hsl(349, 70%, 56%);
-        transition: all 0.1s ease-in-out;
-        cursor: pointer;
       }
-      .scissors-button {
-        height: 10rem;
-        width: 10rem;
-        background-color: #e8e8e8;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        border: solid;
-        border-width: 1.5rem;
+      .scissors {
         border-color: hsl(40, 84%, 53%);
-        transition: all 0.1s ease-in-out;
-        cursor: pointer;
       }
       .empty-button {
-        height: 20rem;
-        width: 20rem;
+        height: 19.5rem;
+        width: 19.5rem;
         background-color: rgba(0, 0, 0, 0.2);
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 50%;
       }
-      .paper-button:hover {
+      .game-button:hover {
         transform: scale(0.9);
       }
-      .rock-button:hover {
-        transform: scale(0.9);
+
+      .step-two-button {
+        height: 15rem;
+        width: 15rem;
+        border-width: 36px;
       }
-      .scissors-button:hover {
-        transform: scale(0.9);
-      }
+
       .picked-screen {
         display: flex;
         flex-direction: column;
@@ -227,8 +214,59 @@
       .rules-footer {
         flex: 1;
       }
-      h2 {
-        z-index: 2;
+      .button-img {
+        height: 144px;
+        width: 128px;
+      }
+
+      @media (max-width: 768px) {
+        .scoreboard {
+          margin: 5vh 5vw 5vh 5vw;
+          padding: 16px;
+        }
+
+        .game-button {
+          height: 7rem;
+          width: 7rem;
+          border-width: 1rem;
+        }
+        .step-two-button {
+          height: 6rem;
+          width: 6rem;
+          border-width: 1rem;
+        }
+        .img-logo {
+          width: 128px;
+        }
+
+        .button-img {
+          height: 72px;
+          width: 64px;
+        }
+        .score-container {
+          width: 30%;
+        }
+        .empty-button {
+          height: 8rem;
+          width: 8rem;
+        }
+        h2 {
+          font-size: small;
+        }
+        .battle-results {
+          position: absolute;
+          bottom: 10vh;
+        }
+        .battle-results-button {
+          padding: 8px;
+          width: 50vw;
+        }
+        .picked-screen {
+          margin-bottom: 25vh;
+        }
+        .spacing {
+          margin-right: 10vw;
+        }
       }
     </style>
   </head>
@@ -236,7 +274,7 @@
     <div class="scoreboard-header">
       <div class="scoreboard">
         <div class="header-logo">
-          <img src="images/logo.svg" height="100%" width="162px" />
+          <img src="images/logo.svg" class="img-logo" />
         </div>
         <div class="score-container">
           <span class="score-header">SCORE</span>
@@ -248,12 +286,16 @@
     <div class="steps" id="steps">
       <div class="step-one">
         <div class="step-one-rows">
-          <div class="paper-button" id="paper" onClick="playerChoice('paper')">
+          <div
+            class="game-button paper"
+            id="paper"
+            onClick="playerChoice('paper')"
+          >
             <img src="images/icon-paper.svg" height="72px" width="64px" />
           </div>
 
           <div
-            class="scissors-button"
+            class="game-button scissors"
             id="scissors"
             onClick="playerChoice('scissors')"
             style="margin-left: 64px;"
@@ -262,14 +304,13 @@
           </div>
         </div>
 
-        <div class="rock-button" id="rock" onClick="playerChoice('rock')">
+        <div class="game-button rock" id="rock" onClick="playerChoice('rock')">
           <img src="images/icon-rock.svg" height="72px" width="64px" />
         </div>
       </div>
     </div>
 
     <div class="rules-footer">
-      aaa
       <div class="attribution">
         Challenge by
         <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
@@ -297,11 +338,11 @@
 
       function playerChoice(playerWeapon) {
         let stepsDiv = document.getElementById("steps");
-        stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen' ><h2>YOU PICKED</h2><div id='player' class='${playerWeapon}-button' style='height:15rem; width:15rem;border-width:36px'><img src='images/icon-${playerWeapon}.svg' height='144px' width='128px' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div id='ai' class='empty-button'></div></div></div>`;
+        stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen spacing' ><h2>YOU PICKED</h2><div id='player' class='game-button ${playerWeapon} step-two-button' ><img src='images/icon-${playerWeapon}.svg' class='button-img' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div id='ai' class='empty-button'></div></div></div>`;
 
         setTimeout(function () {
           let AiWeapon = aiChoice();
-          stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen' ><h2>YOU PICKED</h2><div id='player' class='${playerWeapon}-button' style='height:15rem; width:15rem;border-width:36px'><img src='images/icon-${playerWeapon}.svg' height='144px' width='128px' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div id='ai' class='${AiWeapon}-button' style='height:15rem; width:15rem;border-width:36px'><img src='images/icon-${AiWeapon}.svg' height='144px' width='128px' /></div></div></div>`;
+          stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen spacing' ><h2>YOU PICKED</h2><div id='player' class='game-button ${playerWeapon} step-two-button' ><img src='images/icon-${playerWeapon}.svg' class='button-img' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div id='ai' class='game-button ${AiWeapon} step-two-button' ><img src='images/icon-${AiWeapon}.svg' class='button-img' /></div></div></div>`;
           setTimeout(function () {
             let winner = decideWinner(playerWeapon, AiWeapon);
             let score = document.getElementById("score-value");
@@ -312,8 +353,7 @@
               case "player":
                 score.innerHTML = parseFloat(score.innerHTML) + 1;
                 localStorage.setItem("scoreValue", score.innerHTML);
-                player.style.boxShadow =
-                  "0px 0px 30px 120px hsl(214, 47%, 30%)";
+                player.style.boxShadow = "0px 0px 30px 60px hsl(214, 47%, 30%)";
                 results.innerHTML =
                   "<span class='battle-results-message'>YOU WIN</span> <div class='battle-results-button' onClick='restartGame()'>PLAY AGAIN</div>";
 
@@ -321,7 +361,7 @@
               case "ai":
                 score.innerHTML = parseFloat(score.innerHTML) - 1;
                 localStorage.setItem("scoreValue", score.innerHTML);
-                ai.style.boxShadow = "0px 0px 30px 120px hsl(214, 47%, 30%)";
+                ai.style.boxShadow = "0px 0px 30px 60px hsl(214, 47%, 30%)";
                 results.innerHTML =
                   "<span class='battle-results-message'>YOU LOSE</span> <div class='battle-results-button' onClick='restartGame()'>PLAY AGAIN</div>";
                 break;
@@ -362,7 +402,7 @@
       }
       function restartGame() {
         let stepsDiv = document.getElementById("steps");
-        stepsDiv.innerHTML = `<div class="steps" id="steps"><div class="step-one"><div class="step-one-rows"><div class="paper-button" id="paper" onClick="playerChoice('paper')"><img src="images/icon-paper.svg" height="72px" width="64px" /></div><div class="scissors-button" id="scissors" onClick="playerChoice('scissors')" style="margin-left: 64px;"><img src="images/icon-scissors.svg" height="72px" width="64px" />   </div> </div> <div class="rock-button" id="rock" onClick="playerChoice('rock')"><img src="images/icon-rock.svg" height="72px" width="64px" /></div></div>`;
+        stepsDiv.innerHTML = `<div class="steps" id="steps"><div class="step-one"><div class="step-one-rows"><div class="game-button paper" id="paper" onClick="playerChoice('paper')"><img src="images/icon-paper.svg" height="72px" width="64px" /></div><div class="game-button scissors" id="scissors" onClick="playerChoice('scissors')" style="margin-left: 64px;"><img src="images/icon-scissors.svg" height="72px" width="64px" />   </div> </div> <div class="game-button rock" id="rock" onClick="playerChoice('rock')"><img src="images/icon-rock.svg" height="72px" width="64px" /></div></div>`;
       }
     </script>
   </body>
