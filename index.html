@@ -363,7 +363,7 @@
     <div class="scoreboard-header">
       <div class="scoreboard">
         <div class="header-logo">
-          <img src="images/logo.svg" class="img-logo" />
+          <img src="images/logo.svg" class="img-logo" alt="logo" />
         </div>
         <div class="score-container">
           <span class="score-header">SCORE</span>
@@ -380,7 +380,12 @@
             id="paper"
             onClick="playerChoice('paper')"
           >
-            <img src="images/icon-paper.svg" height="72px" width="64px" />
+            <img
+              src="images/icon-paper.svg"
+              height="72px"
+              width="64px"
+              alt="paper-icon"
+            />
           </div>
 
           <div
@@ -389,12 +394,22 @@
             onClick="playerChoice('scissors')"
             style="margin-left: 64px;"
           >
-            <img src="images/icon-scissors.svg" height="72px" width="64px" />
+            <img
+              src="images/icon-scissors.svg"
+              height="72px"
+              width="64px"
+              alt="scissors-icon"
+            />
           </div>
         </div>
 
         <div class="game-button rock" id="rock" onClick="playerChoice('rock')">
-          <img src="images/icon-rock.svg" height="72px" width="64px" />
+          <img
+            src="images/icon-rock.svg"
+            height="72px"
+            width="64px"
+            alt="rock-icon"
+          />
         </div>
       </div>
     </div>
@@ -428,11 +443,11 @@
 
       function playerChoice(playerWeapon) {
         let stepsDiv = document.getElementById("steps");
-        stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen spacing' ><h2>YOU PICKED</h2><div id='player' class='game-button ${playerWeapon} step-two-button' ><img src='images/icon-${playerWeapon}.svg' class='button-img' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div id='ai' class='empty-button'></div></div></div>`;
+        stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen spacing' ><h2>YOU PICKED</h2><div id='player' class='game-button ${playerWeapon} step-two-button' ><img src='images/icon-${playerWeapon}.svg' class='button-img' alt='player-object' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div id='ai' class='empty-button'></div></div></div>`;
 
         setTimeout(function () {
           let AiWeapon = aiChoice();
-          stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen spacing' ><h2>YOU PICKED</h2><div id='player' class='game-button ${playerWeapon} step-two-button' ><img src='images/icon-${playerWeapon}.svg' class='button-img' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div id='ai' class='game-button ${AiWeapon} step-two-button' ><img src='images/icon-${AiWeapon}.svg' class='button-img' /></div></div></div>`;
+          stepsDiv.innerHTML = `<div class='step-two'><div class='picked-screen spacing' ><h2>YOU PICKED</h2><div id='player' class='game-button ${playerWeapon} step-two-button' ><img src='images/icon-${playerWeapon}.svg' class='button-img' alt='player-object' /></div></div><div class='battle-results' id='battle-results'></div><div class='picked-screen' ><h2>THE HOUSE PICKED</h2><div id='ai' class='game-button ${AiWeapon} step-two-button' ><img src='images/icon-${AiWeapon}.svg' class='button-img' alt='ai-weapon' /></div></div></div>`;
           setTimeout(function () {
             let winner = decideWinner(playerWeapon, AiWeapon);
             let score = document.getElementById("score-value");
@@ -502,7 +517,7 @@
           modal.setAttribute("class", "rules-modal");
           modal.setAttribute("id", "rules-modal");
           modal.innerHTML =
-            '<header class="modal-header"><h1>RULES</h1><div class="modal-close" onClick="onClose()"><img src="./images/close-button.png" height="24px" width="24px"></div></header><div class="modal-img"><img src="images/image-rules.svg" heigh="128px" width="288px" /></div>';
+            '<header class="modal-header"><h1>RULES</h1><div class="modal-close" onClick="onClose()"><img src="./images/close-button.png" height="24px" width="24px" alt="rules-img"></div></header><div class="modal-img"><img src="images/image-rules.svg" heigh="128px" width="288px" /></div>';
           let body = document.getElementById("body");
           body.appendChild(modal);
         }
