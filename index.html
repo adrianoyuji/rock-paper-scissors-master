@@ -236,6 +236,37 @@
       .rules-button:hover {
         transform: scale(0.9);
       }
+      .rules-modal {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #e8e8e8;
+        color: hsl(229, 25%, 31%);
+        padding: 24px;
+        border-radius: 8px;
+      }
+      .modal-header {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+      }
+      .modal-image {
+        height: 100%;
+        width: 100%;
+      }
+
+      h1 {
+        flex-grow: 1;
+      }
+      .modal-close {
+        cursor: pointer;
+        padding: 8px;
+      }
+      .modal-close:hover {
+        background-color: gray;
+        border-radius: 50%;
+      }
       @media (max-width: 768px) {
         .scoreboard {
           margin: 5vh 5vw 5vh 5vw;
@@ -297,10 +328,36 @@
         .attribution {
           margin-top: 16px;
         }
+        .rules-modal {
+          height: 100vh;
+          width: 100vw;
+          padding: unset;
+          border-radius: unset;
+        }
+        .modal-header {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .modal-close {
+          position: absolute;
+          bottom: 15vh;
+          padding: unset;
+        }
+        .modal-img {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 30vh;
+        }
+        h1 {
+          position: absolute;
+          top: 5vh;
+        }
       }
     </style>
   </head>
-  <body>
+  <body id="body">
     <div class="scoreboard-header">
       <div class="scoreboard">
         <div class="header-logo">
@@ -434,6 +491,24 @@
       function restartGame() {
         let stepsDiv = document.getElementById("steps");
         stepsDiv.innerHTML = `<div class="steps" id="steps"><div class="step-one"><div class="step-one-rows"><div class="game-button paper" id="paper" onClick="playerChoice('paper')"><img src="images/icon-paper.svg" height="72px" width="64px" /></div><div class="game-button scissors" id="scissors" onClick="playerChoice('scissors')" style="margin-left: 64px;"><img src="images/icon-scissors.svg" height="72px" width="64px" />   </div> </div> <div class="game-button rock" id="rock" onClick="playerChoice('rock')"><img src="images/icon-rock.svg" height="72px" width="64px" /></div></div>`;
+      }
+
+      function handleModal() {
+        let checkModal = document.getElementById("rules-modal");
+        if (!checkModal) {
+          let modal = document.createElement("div");
+          modal.setAttribute("class", "rules-modal");
+          modal.setAttribute("id", "rules-modal");
+          modal.innerHTML =
+            '<header class="modal-header"><h1>RULES</h1><div class="modal-close" onClick="onClose()"><img src="./images/close-button.png" height="24px" width="24px"></div></header><div class="modal-img"><img src="images/image-rules.svg" heigh="128px" width="288px" /></div>';
+          let body = document.getElementById("body");
+          body.appendChild(modal);
+        }
+      }
+
+      function onClose() {
+        let modal = document.getElementById("rules-modal");
+        modal.parentNode.removeChild(modal);
       }
     </script>
   </body>
