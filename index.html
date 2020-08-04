@@ -225,6 +225,7 @@
         border: solid;
         border-radius: 8px;
         border-color: #e8e8e8;
+        border-width: 2px;
         color: #e8e8e8;
         letter-spacing: 0.2rem;
         padding: 16px 48px 16px 48px;
@@ -382,8 +383,8 @@
           >
             <img
               src="images/icon-paper.svg"
-              height="72px"
-              width="64px"
+              height="72"
+              width="64"
               alt="paper-icon"
             />
           </div>
@@ -396,8 +397,8 @@
           >
             <img
               src="images/icon-scissors.svg"
-              height="72px"
-              width="64px"
+              height="72"
+              width="64"
               alt="scissors-icon"
             />
           </div>
@@ -406,8 +407,8 @@
         <div class="game-button rock" id="rock" onClick="playerChoice('rock')">
           <img
             src="images/icon-rock.svg"
-            height="72px"
-            width="64px"
+            height="72"
+            width="64"
             alt="rock-icon"
           />
         </div>
@@ -507,7 +508,7 @@
       }
       function restartGame() {
         let stepsDiv = document.getElementById("steps");
-        stepsDiv.innerHTML = `<div class="steps" id="steps"><div class="step-one"><div class="step-one-rows"><div class="game-button paper" id="paper" onClick="playerChoice('paper')"><img src="images/icon-paper.svg" height="72px" width="64px" /></div><div class="game-button scissors" id="scissors" onClick="playerChoice('scissors')" style="margin-left: 64px;"><img src="images/icon-scissors.svg" height="72px" width="64px" />   </div> </div> <div class="game-button rock" id="rock" onClick="playerChoice('rock')"><img src="images/icon-rock.svg" height="72px" width="64px" /></div></div>`;
+        stepsDiv.innerHTML = `<div class="steps" id="steps"><div class="step-one"><div class="step-one-rows"><div class="game-button paper" id="paper" onClick="playerChoice('paper')"><img src="images/icon-paper.svg" height="72" width="64" /></div><div class="game-button scissors" id="scissors" onClick="playerChoice('scissors')" style="margin-left: 64px;"><img src="images/icon-scissors.svg" height="72" width="64" />   </div> </div> <div class="game-button rock" id="rock" onClick="playerChoice('rock')"><img src="images/icon-rock.svg" height="72" width="64" /></div></div>`;
       }
 
       function handleModal() {
@@ -517,7 +518,7 @@
           modal.setAttribute("class", "rules-modal");
           modal.setAttribute("id", "rules-modal");
           modal.innerHTML =
-            '<header class="modal-header"><h1>RULES</h1><div class="modal-close" onClick="onClose()"><img src="./images/close-button.png" height="24px" width="24px" alt="rules-img"></div></header><div class="modal-img"><img src="images/image-rules.svg" heigh="128px" width="288px" /></div>';
+            '<header class="modal-header"><h1>RULES</h1><div class="modal-close" onClick="onClose()"><img src="./images/close-button.png" height="24" width="24" alt="rules-img"></div></header><div class="modal-img"><img src="images/image-rules.svg" heigh="128" width="288" /></div>';
           let body = document.getElementById("body");
           body.appendChild(modal);
         }
