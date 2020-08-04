@@ -10,6 +10,10 @@ Thanks for checking out this front-end coding challenge.
 
 **To do this challenge, you need a basic understanding of HTML, CSS and JavaScript.**
 
+## Check it Live
+
+https://rock-paper-scissors-master-navy.vercel.app/
+
 ## The challenge
 
 Your challenge is to build out this Rock, Paper, Scissors game and get it looking as close to the design as possible.
